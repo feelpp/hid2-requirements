@@ -1,0 +1,176 @@
+@startuml hidalgo2_pilots
+left to right direction
+skinparam actorStyle awesome
+
+'actors
+actor "Pilot Scientist" as pilot_scientist
+actor "Data Scientist" as data_scientist
+
+'packages
+
+package "Pilots" << PIL >> {
+    left to right direction
+
+
+    usecase SCOPIL001 as "
+    Coupling Simulations and Data Sources
+    "
+
+    usecase SCOPIL002 as "
+    Development of tools for generating synthetic data
+    "
+
+    usecase SCOPIL003 as "
+    Integrate real-world or synthetic sensor data into simulations
+    "
+
+    usecase SCOPIL004 as "
+    Use case validation
+    "
+
+    usecase SCOPIL005 as "
+    Large-scale time series analytics environment
+    "
+
+    usecase SCOPIL006 as "
+    Numerical linear algebra kernels for pilots
+    "
+
+    usecase SCOPIL007 as "
+    UAP pilot boudary conditions measurement
+    "
+
+    usecase SCOPIL008 as "
+    UAP wind measurement
+    "
+
+    usecase SCOPIL031 as "
+    Uncertainty Quantification
+    "
+
+    usecase SCOPIL009 as "
+    UAP UQ of wind computations
+    "
+
+    usecase SCOPIL010 as "
+    UAP operational environment
+    "
+
+    usecase SCOPIL011 as "
+    UAP reduced order model for selected cities
+    "
+
+    usecase SCOPIL012 as "
+    UAP Model Order Reduction training
+    "
+
+    usecase SCOPIL013 as "
+    UBM - Building Energy Simulation
+    "
+
+    usecase SCOPIL014 as "
+    UBM - Improvement of the Building Model Generator
+    "
+
+    usecase SCOPIL015 as "
+    UBM - Improvement of the radioactive heat transfer
+    "
+
+    usecase SCOPIL016 as "
+    UBM - strategies for computation acceleration
+    "
+
+    usecase SCOPIL017 as "
+    UBM - demonstration on the urban scale
+    "
+
+    usecase SCOPIL018 as "
+    RES - advancing wind and solar energy models
+    "
+
+    usecase SCOPIL019 as "
+    RES - reducing impact of uncertainties
+    "
+
+    usecase SCOPIL020 as "
+    RES - improving performance for larger domans
+    "
+
+    usecase SCOPIL021 as "
+    RES - enhancing the sun/shade model
+    "
+
+    usecase SCOPIL022 as "
+    RES - validation of the increased performace
+    "
+
+    usecase SCOPIL023 as "
+    RES - validation of model parameters uncertainty
+    "
+
+    usecase SCOPIL024 as "
+    WF - provide computational capacity for simulation at several scales
+    "
+
+    usecase SCOPIL025 as "
+    WF - integrate models and results for analysis
+    "
+
+    usecase SCOPIL026 as "
+    WF - coupling weather data and models at different scales
+    "
+
+    usecase SCOPIL027 as "
+    WF – boundary conditions
+    "
+
+    usecase SCOPIL028 as "
+    WF – UQ 
+    "
+
+    usecase SCOPIL029 as "
+    Technical documentation of use cases
+    "
+
+    SCOPIL004 .d.> SCOPIL022 : include
+
+    SCOPIL031 .d.> SCOPIL009 : include
+    SCOPIL031 .d.> SCOPIL019 : include
+    SCOPIL031 .d.> SCOPIL023 : include
+    SCOPIL031 .d.> SCOPIL028 : include
+
+    SCOPIL029 .d.> SCOPIL025 : include
+
+    SCOPIL001 .d.> SCOPIL026 : include
+}
+
+
+pilot_scientist -- SCOPIL001
+data_scientist -- SCOPIL001
+data_scientist -- SCOPIL002
+data_scientist -- SCOPIL003
+pilot_scientist -- SCOPIL004
+data_scientist -- SCOPIL005
+data_scientist -- SCOPIL006
+pilot_scientist -- SCOPIL007
+pilot_scientist -- SCOPIL008
+pilot_scientist -- SCOPIL010
+pilot_scientist -- SCOPIL011
+pilot_scientist -- SCOPIL012
+pilot_scientist -- SCOPIL013
+pilot_scientist -- SCOPIL014
+pilot_scientist -- SCOPIL015
+pilot_scientist -- SCOPIL016
+pilot_scientist -- SCOPIL017
+pilot_scientist -- SCOPIL018
+pilot_scientist -- SCOPIL020
+pilot_scientist -- SCOPIL021
+pilot_scientist -- SCOPIL024
+pilot_scientist -- SCOPIL029
+pilot_scientist -- SCOPIL031
+
+skinparam usecase<<check>> {
+    BackgroundColor LightBlue
+}
+
+@enduml

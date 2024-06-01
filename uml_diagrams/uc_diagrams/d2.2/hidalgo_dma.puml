@@ -1,0 +1,105 @@
+@startuml hidalgo2_dma
+'left to right direction
+skinparam actorStyle awesome
+
+'packages
+
+package "Data Management" << DMA >> {
+    left to right direction
+
+
+    usecase SCODMA001 as "
+    Data Quering
+    --
+    Querying or browsing datasets from sources
+    Resulting of this process, a URI for each dataset is provided
+    "
+
+    usecase SCODMA002 as "
+    UAP data collection
+    "
+
+    usecase SCODMA003 as "
+    UBM data collection
+    "
+
+    usecase SCODMA004 as "
+    RES data collection
+    "
+
+    usecase SCODMA005 as "
+    WF data collection
+    "
+
+    usecase SCODMA006  as "
+    Data Provisioning
+    --
+    Provisioning of datasets acting as input or outputs
+    of pilot simulations
+    "
+
+    usecase SCODMA007  as "
+    Data Collection
+    --
+    Collecting datasets from sources (Cloud, HPC).
+    Sources of datasets are identified by Data Quering
+    "
+
+    usecase SCODMA008  as "
+    Data Transfer
+    --
+    Transfering datasets from original source to target data storage.
+    Centralized data storage can act as an intermediary.
+    "
+
+    usecase SCODMA009  as "
+    Data Processing (HPDA)
+    --
+    Data transformation pipeline that converts original datasets 
+    (from sources) into transformed datasets 
+    to be used as input of pilot simulations or for
+    the post-analysis of simulation results.
+    "
+
+    usecase SCODMA010  as "
+    Data Monitoring (HPDA)
+    --
+    Monitoring tracking during data transfer
+    or HPDA transformation
+    "
+
+    usecase SCODMA011  as "
+    Data Visualization
+    --
+    Apply visualization techniques and tools to represent 
+    datasets and conduct visual analysis
+    "
+
+    SCODMA007 .u.> SCODMA001 : include
+    SCODMA006 .u.> SCODMA007 : include
+    SCODMA006 .u.> SCODMA008 : include
+    SCODMA006 .u.> SCODMA009 : include
+
+    SCODMA008 .u.> SCODMA010 : include
+    SCODMA009 .u.> SCODMA010 : include
+
+    SCODMA002 -d-|> SCODMA007 : extends
+    SCODMA003 -d-|> SCODMA007 : extends
+    SCODMA004 -d-|> SCODMA007 : extends
+    SCODMA005 -d-|> SCODMA007 : extends
+}
+
+'actors
+actor "Pilot Scientist" as pilot_scientist
+actor "Data Scientist" as data_scientist
+
+data_scientist -u- SCODMA006
+pilot_scientist -d- SCODMA011
+pilot_scientist -d- SCODMA001
+
+
+skinparam usecase<<check>> {
+    BackgroundColor LightBlue
+}
+
+@enduml

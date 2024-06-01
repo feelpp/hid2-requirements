@@ -1,0 +1,61 @@
+@startuml hidalgo2_dma
+'left to right direction
+skinparam actorStyle awesome
+
+'packages
+
+package "Data Management" << DMA >> {
+    'left to right direction
+
+
+    usecase SCODMA001 as "
+    Customize requested weather data
+    "
+
+    usecase SCODMA002 as "
+    UAP data collection
+    "
+
+    usecase SCODMA003 as "
+    UBM data collection
+    "
+
+    usecase SCODMA004 as "
+    RES data collection
+    "
+
+    usecase SCODMA005 as "
+    WF data collection
+    "
+
+    usecase SCODMA006  as "
+    Data Acquisition
+    "
+
+    usecase SCODMA007  as "
+    Data Collection
+    "
+
+    SCODMA002 -d-|> SCODMA007
+    SCODMA003 -d-|> SCODMA007
+    SCODMA004 -d-|> SCODMA007
+    SCODMA005 -d-|> SCODMA007
+
+    
+    SCODMA006 .u.> SCODMA001 : include
+    SCODMA006 .u.> SCODMA007 : include
+}
+
+'actors
+actor "Pilot Scientist" as pilot_scientist
+actor "Data Scientist" as data_scientist
+
+data_scientist -u- SCODMA006
+pilot_scientist -u- SCODMA006
+
+
+skinparam usecase<<check>> {
+    BackgroundColor LightBlue
+}
+
+@enduml

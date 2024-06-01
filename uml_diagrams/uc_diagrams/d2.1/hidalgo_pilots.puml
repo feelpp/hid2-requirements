@@ -1,0 +1,309 @@
+@startuml hidalgo2_pilots
+left to right direction
+skinparam actorStyle awesome
+
+'actors
+actor "Pilot Scientist" as pilot_scientist
+actor "Data Scientist" as data_scientist
+
+'packages
+
+package "Pilots" << PIL >> {
+    left to right direction
+
+
+    usecase SCOPIL001 as "
+    Coupling Simulations and Data Sources
+    --
+    Simulations, data and additional models 
+    shall be incorporated into relevant pilot 
+    use cases to increase their accuracy
+    "
+
+    usecase SCOPIL002 as "
+    Development of tools for generating synthetic data
+    --
+    Synthetic data is needed in situations where 
+    we do not have access to real data or when other 
+    conditions affecting research need to be simulated
+    "
+
+    usecase SCOPIL003 as "
+    Integrate real-world or synthetic sensor data into simulations
+    --
+    Integrate real-world or synthetic sensor data in simulations 
+    in order to validate their results or improve their precision. 
+    Includes pre-processing of data, static data 
+    inclusion and dynamic live-data inclusion
+    "
+
+    usecase SCOPIL004 as "
+    Use case validation
+    --
+    The methods and data 
+    to be used for validation are described. 
+    Validate simulations and 
+    evaluate the performance of different implementations
+    "
+
+    usecase SCOPIL005 as "
+    Large-scale time series analytics environment
+    --
+    Process and visualize time series data ...
+    "
+
+    usecase SCOPIL006 as "
+    Numerical linear algebra kernels for pilots
+    --
+    Compute and/or approximate matrix spectra and perform 
+    PCA in a reasonable time on HPCs.
+    "
+
+    usecase SCOPIL007 as "
+    UAP pilot boudary conditions measurement
+    --
+    Boundary conditions are derived either from 
+    wind measurements or from couplings with 
+    external weather/wind simulation
+    "
+
+    usecase SCOPIL008 as "
+    UAP wind measurement
+    --
+    Wind measurements and/or mesoscale simulation 
+    results can be assimilated to increase the 
+    accuracy of the wind-field simulation
+    "
+
+    usecase SCOPIL009 as "
+    UAP UQ of wind computations
+    --
+    Quantification of uncertainty of the 
+    wind-computations are condicted by ensemble runs
+    "
+
+    usecase SCOPIL010 as "
+    UAP operational environment
+    --
+    Creation of an operational environment for 
+    UAP in which end-users may apply the UAP.AQ features
+    "
+
+    usecase SCOPIL011 as "
+    UAP reduced order model for selected cities
+    --
+    This enables the users real-time computations 
+    of the wind-field and air pollutant concentrations
+    "
+
+    usecase SCOPIL012 as "
+    UAP Model Order Reduction training
+    --
+    Training of MOR for UAP.Air, in which a series 
+    of full order simulations for snap-shot matrix 
+    generation and then the singular value decomposition 
+    of the extremely large snapshot matrix is required.
+    "
+
+    usecase SCOPIL013 as "
+    UBM - Building Energy Simulation
+    --
+    Advancing of Building Energy Simulation engine 
+    that simulates energy and indoor air quality 
+    of a single building or a set of buildings
+    "
+
+    usecase SCOPIL014 as "
+    UBM - Improvement of the Building Model Generator
+    --
+    Improvement of the Building Model Generator 
+    for automatically generated building models 
+    from a geometry file, city councils or others)
+    "
+
+    usecase SCOPIL015 as "
+    UBM - Improvement of the radioactive heat transfer
+    --
+    The radiative heat transfer of the building models 
+    will be improved due to a better estimation 
+    of the solar shading through the integration 
+    of the buildings in their environment
+    "
+
+    usecase SCOPIL016 as "
+    UBM - strategies for computation acceleration
+    --
+    Development of two strategies to accelerate the computation: 
+    1) city building partitioning to use domain decomposition and 
+    2)  parallel in time algorithms to accelerate time stepping
+    "
+
+    usecase SCOPIL017 as "
+    UBM - demonstration on the urban scale
+    --
+    Preparation of demontration of the urban scale 
+    approach on selected cases along with validation process
+    "
+
+    usecase SCOPIL018 as "
+    RES - advancing wind and solar energy models
+    --
+    Advancing models for wind energy and solar energy
+    calculators based on RES.* prediction
+    "
+
+    usecase SCOPIL019 as "
+    RES - reducing impact of uncertainties
+    --
+    Study the impact of uncertainties in the model and 
+    limit those (thus minimising the demand for computational resources
+    "
+
+    usecase SCOPIL020 as "
+    RES - improving performance for larger domans
+    --
+    Improving performance for larger domains (and finer meshes) 
+    to gain knowledge if more detailed simulation results 
+    in better predictions
+    "
+
+    usecase SCOPIL021 as "
+    RES - enhancing the sun/shade model
+    --
+    Enhancing the sun/shade model in RES.SOLAR
+    "
+
+    usecase SCOPIL022 as "
+    RES - validation of the increased performace
+    --
+    Increased performance will be validated by 
+    comparing the obtained results with the baseline performance.
+    "
+
+    usecase SCOPIL023 as "
+    RES - validation of model parameters uncertainty
+    --
+    The study on uncertainty will validate which parameters 
+    of the model are crucial for the end results, 
+    and which have neglectable impact. 
+    "
+
+    usecase SCOPIL024 as "
+    WF - provide computational capacity for simulation at several scales
+    --
+    Provide a computational capacity for the simulation of 
+    wildfire-atmosphere interactions and smoke dispersion 
+    at several scales aimed at the assessment of risk and 
+    potential impacts over populated areas
+    "
+
+    usecase SCOPIL025 as "
+    WF - integrate models and results for analysis
+    --
+    Integrated models and results in visually-oriented platforms 
+    for analysis, training and education to advance in the 
+    understanding and characterisation between fire and atmosphere
+    "
+
+    usecase SCOPIL026 as "
+    WF - coupling weather data and models at different scales
+    --
+    Coupling weather data and models at different scales, 
+    such as mesoscale forecast models (WRF), 
+    numerical fluido-dynamic models of air movement (Open Foam) 
+    and smoke emission and dispersion models, with fire spread 
+    and fire-atmosphere interaction thermo-fluid-dynamic models (FDS).
+    "
+
+    usecase SCOPIL027 as "
+    WF – boundary conditions
+    --
+    Boundary conditions derived either from real world 
+    measurements or from couplings with external simulation data
+    "
+
+    usecase SCOPIL028 as "
+    WF – UQ 
+    --
+    The study on uncertainty will validate which parameters 
+    of the model are crucial for the end results, 
+    and which have neglectable impact
+    "
+
+    usecase SCOPIL029 as "
+    Technical documentation of use cases
+    --
+    Technical documentation of the use cases must be available. 
+    This includes i.a. specification of available data and 
+    its format and processing methods
+    "
+
+    usecase SCOPIL030 as "Wild Fires"
+    usecase SCOPIL032 as "Urban Air Pollution"
+    usecase SCOPIL033 as "Urban Building"
+    usecase SCOPIL034 as "Renewable Energy Sources"
+
+    usecase SCOPIL031 as "
+    Uncertainty Quantification
+    "
+
+    SCOPIL004 .d.> SCOPIL022 : include
+
+    SCOPIL031 .d.> SCOPIL009 : include
+    SCOPIL031 .d.> SCOPIL019 : include
+    SCOPIL031 .d.> SCOPIL023 : include
+    SCOPIL031 .d.> SCOPIL028 : include
+
+    SCOPIL029 .d.> SCOPIL025 : include
+
+    SCOPIL001 .d.> SCOPIL026 : include
+
+    SCOPIL030 .d.> SCOPIL024 : include
+    SCOPIL030 .d.> SCOPIL025 : include
+    SCOPIL030 .d.> SCOPIL026 : include
+    SCOPIL030 .d.> SCOPIL027 : include
+    SCOPIL030 .d.> SCOPIL028 : include
+
+    SCOPIL032 .d.> SCOPIL007 : include
+    SCOPIL032 .d.> SCOPIL008 : include
+    SCOPIL032 .d.> SCOPIL009 : include
+    SCOPIL032 .d.> SCOPIL010 : include
+    SCOPIL032 .d.> SCOPIL011 : include
+    SCOPIL032 .d.> SCOPIL012 : include
+
+    SCOPIL033 .d.> SCOPIL013 : include
+    SCOPIL033 .d.> SCOPIL014 : include
+    SCOPIL033 .d.> SCOPIL015 : include
+    SCOPIL033 .d.> SCOPIL016 : include
+    SCOPIL033 .d.> SCOPIL017 : include
+
+    SCOPIL034 .d.> SCOPIL018 : include
+    SCOPIL034 .d.> SCOPIL019 : include
+    SCOPIL034 .d.> SCOPIL020 : include
+    SCOPIL034 .d.> SCOPIL021 : include
+    SCOPIL034 .d.> SCOPIL022 : include
+    SCOPIL034 .d.> SCOPIL023 : include
+
+}
+
+
+pilot_scientist -- SCOPIL001
+data_scientist -- SCOPIL001
+data_scientist -- SCOPIL002
+data_scientist -- SCOPIL003
+pilot_scientist -- SCOPIL004
+data_scientist -- SCOPIL005
+data_scientist -- SCOPIL006
+
+pilot_scientist -- SCOPIL030
+pilot_scientist -- SCOPIL029
+pilot_scientist -- SCOPIL031
+pilot_scientist -- SCOPIL032
+pilot_scientist -- SCOPIL033
+pilot_scientist -- SCOPIL034
+
+skinparam usecase<<check>> {
+    BackgroundColor LightBlue
+}
+
+@enduml

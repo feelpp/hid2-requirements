@@ -1,0 +1,90 @@
+@startuml hidalgo2_dma
+'left to right direction
+skinparam actorStyle awesome
+
+'packages
+
+package "Data Management" << DMA >> {
+    'left to right direction
+
+
+    usecase SCODMA001 as "
+    Customize requested weather data
+    --
+    Customize the requested data (e.g. grid, subset, data format), 
+    streamline the integration of the data considering pilots' specification.
+    "
+
+    usecase SCODMA002 as "
+    UAP data collection
+    --
+    City geometry, road network, and building information data. 
+    Global or mesoscale weather data (wind and planetary layer height) 
+    is needed. Emission data for traffic and building emissions (top-down), 
+    and traffic data in bottom-up are requested. 
+    "
+
+    usecase SCODMA003 as "
+    UBM data collection
+    --
+    City geometry and topology including building, 
+    vegetation and road network. Geometric representation 
+    of buildings, Material properties, Use/occupation scenarios, 
+    energy systems schedule if applies, Weather files, 
+    Energy consumption of the building, 
+    type of heating system, Type of energy, Sensor data 
+    (deployed, heat, humidity, air quality, energy consumption)
+    "
+
+    usecase SCODMA004 as "
+    RES data collection
+    --
+    Global Forecast System data (for the initial weather conditions). 
+    The terrain topography data delivered by the publicly available 
+    repositories: SRTM and EU-DEM. The land cover obtained from publicly 
+    available CORINE data. The building shape and height are delivered 
+    by interested cities, but publicly available data can be used, 
+    such as Geoportal (data for Polish cities) or OpenStreetMaps
+    "
+
+    usecase SCODMA005 as "
+    WF data collection
+    --
+    The following data are used to derive Wildfires simulations: 
+    high resolution mdt, lidar data, land cover, forest fuels, 
+    and photogrammetry imagery, ECMWF and GFS forecast data, 
+    Meteorological observations
+    "
+
+    usecase SCODMA006  as "
+    Data Acquisition
+    "
+
+    usecase SCODMA007  as "
+    Data Collection
+    "
+
+    SCODMA002 -d-|> SCODMA007
+    SCODMA003 -d-|> SCODMA007
+    SCODMA004 -d-|> SCODMA007
+    SCODMA005 -d-|> SCODMA007
+
+    
+    SCODMA006 .u.> SCODMA001 : include
+    SCODMA006 .u.> SCODMA007 : include
+}
+
+'actors
+actor "Pilot Scientist" as pilot_scientist
+actor "Data Scientist" as data_scientist
+
+
+data_scientist -u- SCODMA006
+pilot_scientist -u- SCODMA006
+
+
+skinparam usecase<<check>> {
+    BackgroundColor LightBlue
+}
+
+@enduml

@@ -1,0 +1,68 @@
+@startuml hidalgo2_hpda_ai
+'left to right direction
+skinparam actorStyle awesome
+
+'actors
+actor "HPDA/AI Scientist" as hpda_scientist
+
+'packages
+
+package "HPDA & AI" << DAAI >> {
+    left to right direction
+
+
+    usecase SCODAAI008 as "
+    Data analytics and visualization
+    "
+
+    usecase SCODAAI001 as "
+    Data analytics on notebook frameworks
+    "
+
+    usecase SCODAAI002 as "
+    Apply AI & ML methods for enhanced simulations
+    "
+
+    usecase SCODAAI003 as "
+    Enhance simulations with streaming data 
+    "
+
+    usecase SCODAAI004 <<check>> as "
+    Component testing and validation
+    "
+
+    usecase SCODAAI005 as "
+    Smart assistant for interactive analytical workflows
+    "
+
+    usecase SCODAAI006 as "
+    Seamless and in-situ data analytics on HPDA servers
+    "
+
+    usecase SCODAAI007 as "
+    Hybrid HPDA|HPC application deployment, running and management
+    "
+
+    SCODAAI008 .r.> SCODAAI003: include
+    SCODAAI008 .r.> SCODAAI005 : include
+    SCODAAI008 .r.> SCODAAI006 : include
+    SCODAAI001 -r-|> SCODAAI008
+
+}
+
+actor "Pilot Scientist" as pilot_scientist
+
+hpda_scientist -d- SCODAAI001
+hpda_scientist -d- SCODAAI002
+hpda_scientist -d- SCODAAI008
+
+pilot_scientist -u- SCODAAI002
+pilot_scientist -u- SCODAAI007
+pilot_scientist -u- SCODAAI008
+
+
+skinparam usecase<<check>> {
+    BackgroundColor LightBlue
+}
+
+@enduml

@@ -1,0 +1,108 @@
+@startuml hidalgo2_portal
+'left to right direction
+skinparam actorStyle awesome
+
+'actors
+actor "Portal Admin" as portal_admin
+actor "Orchestration Admin" as orchest_admin
+
+portal_admin <|-l- orchest_admin
+
+'packages
+
+package "Portal" << POR >> {
+    left to right direction
+
+    usecase SCOPOR001 as "
+    Orchestration (Workflow) Management
+    --
+    Deploy, submit, monitor, and revert HPC workflow jobs with simple 
+    unified notion of orchestration blueprints. 
+    Arguably simpler way to work with HPC clusters 
+    for end-users, unified interface for accessing HPC resources 
+    required to integrate marketplace
+    "
+
+    usecase SCOPOR002 as "
+    Define HiDALGO2 orchestrations (workflows)
+    --
+    Analyse and define workflows demanded by all project pilots
+    "
+
+    usecase SCOPOR003 as "
+    Orchestration (Workflow) execution
+    --
+    The portal needs to execute workflows of pilots and 
+    other use cases by means of the current state-of-the-art. 
+    Execution should be highly scalable, failure tolerant, 
+    secure and reliable.
+    "
+
+    usecase SCOPOR004 as "
+    Orchestration (workflow) data management
+    --
+    Storage, serve and manage datasets. 
+    Import data from outside sources, explore data, 
+    visualize data, serve data for processing. 
+    Will be usable by experts at any stage of scenario 
+    handling to provide input data for processing 
+    and save output data afterwards
+    "
+
+    usecase SCOPOR005 as "
+    Orchestration (Workflow) Monitoring
+    --
+    In order to know if the execution is progressing 
+    and even to know some of the intermediate results 
+    as they are being obtained during the execution. 
+    The user needs to know how the application is progressing 
+    to determine if there has been a mistake in the initial 
+    parameters or they should be changed.
+    "
+
+    usecase SCOPOR006 as "
+    Data visualization
+    --
+    Visualize simulation results for validation
+    "
+
+    usecase SCOPOR007 as "
+    3D-visualization of CFD data
+    --
+    Visualize 3D spatial variables, both scalar and vector 
+    valued functions in a moving time frame (with videos), 
+    cross sections or in innovative ways efficiently, 
+    be able to visualize from each module of the workflow
+    "
+
+    usecase SCOPOR008 as "
+    Visualization for data of intermediate workflow steps
+    --
+    Visualizations for data at different stages of the workflow are available. 
+    The data-in-process can be inspected and manually analysed.
+    "
+
+    SCOPOR007 -r-|> SCOPOR006
+    SCOPOR008 -r-|> SCOPOR006
+    
+    SCOPOR001 .l.> SCOPOR002 : include
+    SCOPOR001 .r.> SCOPOR003 : include
+    SCOPOR001 .r.> SCOPOR004 : include
+    SCOPOR001 .r.> SCOPOR005 : include
+
+}
+
+actor "Pilot Scientist" as pilot_scientist
+actor "Data Scientist" as data_scientist
+
+
+orchest_admin -d- SCOPOR001
+data_scientist -u- SCOPOR006
+pilot_scientist -u- SCOPOR001
+
+
+skinparam usecase<<check>> {
+    BackgroundColor LightBlue
+}
+
+@enduml

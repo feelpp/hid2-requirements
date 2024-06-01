@@ -1,0 +1,75 @@
+@startuml hidalgo2_training
+'left to right direction
+skinparam actorStyle awesome
+
+'packages
+
+package "Training" << TRA >> {
+    'left to right direction
+
+
+    usecase SCOTRA001 as "
+    HPC training 
+    --
+    Trainings on how to efficiently deploy and 
+    submit applications on HPC systems.
+    "
+
+    usecase SCOTRA002 as "
+    Cloud training
+    --
+    Learn about data and services, 
+    Know how to efficiently find, retrieve, understand 
+    and process cloud data and use their services
+    "
+
+    usecase SCOTRA003 as "
+    Training in common optimization techniques in HPC systems
+    --
+    Conducting training as part of workshops or hands-on sessions 
+    for project partners and the European scientific community
+    "
+
+    usecase SCOTRA004 as "
+    Link activities to long term initiatives
+    --
+    Link activities to long term initiatives, 
+    such as the European Weather Cloud and DIAS WekEO, 
+    CASTIEL2 and C2ISS portal, ensure for the APIs to be harmonised
+    "
+
+    usecase SCOTRA005 as "
+    Understanding User Groups
+    --
+    Present an understanding of different types of external user groups 
+    (“super-users”, “starting users”, “policy makers”, “NGOs”, etc.) 
+    and which groups to approach for collaboration
+    "
+
+    usecase SCOTRA006 as "
+    Training
+    "
+
+
+    SCOTRA001 -d-|> SCOTRA006
+    SCOTRA002 -d-|> SCOTRA006
+    SCOTRA003 -d-|> SCOTRA006
+}
+
+'actors
+actor "Training provider" as training_provider
+actor "Training admin" as training_admin
+actor "Trainee" as trainee
+
+
+training_provider -u- SCOTRA006
+trainee -u- SCOTRA006
+training_admin -d- SCOTRA004
+training_admin -d- SCOTRA005
+
+
+skinparam usecase<<check>> {
+    BackgroundColor LightBlue
+}
+
+@enduml

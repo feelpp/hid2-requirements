@@ -1,0 +1,103 @@
+@startuml hidalgo2_hpda_ai
+'left to right direction
+skinparam actorStyle awesome
+
+'actors
+actor "Infra Admin" as infra_admin
+actor "HPDA/AI Admin" as hpda_admin
+
+infra_admin <|-d- hpda_admin
+
+'packages
+
+package "HPDA & AI" << DAAI >> {
+    left to right direction
+
+
+    usecase SCODAAI001 <<check>> as "
+    Integration of data analytics notebook frameworks
+    --
+    Provide data exploration, sharing, collaboration 
+    and visualization. Used by data scientists for 
+    carrying out datasets processing and visualization
+    "
+
+    usecase SCODAAI002 <<check>> as "
+    Simulation support with AI & ML methods
+    --
+    Methods of AI and ML should be implemented in order 
+    to support the simulations (e.g. feature extraction 
+    of input data, parameter estimation).
+    "
+
+    usecase SCODAAI003 <<check>> as "
+    Enhance simulations with streaming data
+    --
+    Enable additional pilot applications to fetch 
+    and process streaming data whenever required. 
+    "
+
+    usecase SCODAAI004 as "
+    Component testing and validation
+    --
+    Implementation partners should be able to test their 
+    implementations and in the use case so that the 
+    functionality of the component under test can be evaluated.
+    "
+
+    usecase SCODAAI005 as "
+    Smart assistant for interactive analytical workflows
+    --
+    Receive suggestions on how to complete analytical tasks 
+    that include visual and algorithmic steps. 
+    See a visual result preview for analytical workflows, 
+    which are suggested based on the data and/or user behavior. 
+    Select a preview to activate a ”wizard” for executing that workflow. 
+    Make interactive data analysis more accessible to non-experienced users 
+    by providing suggestions and guidance.
+    "
+
+    usecase SCODAAI006 as "
+    Seamless and in-situ data analytics on HPDA servers
+    --
+    Use and extend data analytics, available on HPDA servers; 
+    seamlessly integrate simulation software and data analytics 
+    software, avoid time-consuming operations of copying 
+    big amounts of data, usable by GSS community.
+    "
+
+    usecase SCODAAI007 <<check>> as "
+    HPDA application deployment and support
+    --
+    Support the running and management of applications 
+    that have both DA and HPC workflow components. 
+    This is used by application providers and developers.
+    "
+
+}
+
+actor "HPC User" as hpc_user
+actor "Pilot Scientist" as pilot_scientist
+actor "Data Scientist" as data_scientist
+
+pilot_scientist -d-|> hpc_user
+data_scientist -d-|> hpc_user
+
+hpda_admin -d- SCODAAI001
+hpda_admin -d- SCODAAI002
+
+data_scientist -u- SCODAAI001
+data_scientist -u- SCODAAI005
+data_scientist -u- SCODAAI006
+
+pilot_scientist -u- SCODAAI003
+pilot_scientist -u- SCODAAI004
+pilot_scientist -u- SCODAAI006
+pilot_scientist -u- SCODAAI007
+
+
+skinparam usecase<<check>> {
+    BackgroundColor LightBlue
+}
+
+@enduml

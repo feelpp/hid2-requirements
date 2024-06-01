@@ -1,0 +1,195 @@
+@startuml hidalgo2_infra
+'left to right direction
+skinparam actorStyle awesome
+
+'actors
+actor "Infra Admin" as infra_admin
+actor "HPC Admin" as hpc_admin
+actor "Cloud Admin" as cloud_admin
+actor "DMS Admin" as dms_admin
+actor "CI/CD Admin" as cicd_admin
+
+
+infra_admin <|-d- hpc_admin
+infra_admin <|-d- dms_admin
+infra_admin <|-d- cicd_admin
+infra_admin <|-d- cloud_admin
+
+
+'packages
+
+package "HPC/HPDA Infrastructure & Implementation" << HPII >> {
+    left to right direction
+
+
+    usecase SCOHPII009 as "
+    Benchmarking Environment
+    --
+    Collect benchmarking data, uniformly process 
+    & visualize it. facilitate benchmarking and 
+    analysis of benchmarking results, generate 
+    synthetic data for benchmarks, reduce amount 
+    of manual work. usable by HPC experts, 
+    cloud service operators and users to help 
+    in evaluation of software and optimization 
+    of applications.
+    "
+
+    usecase SCOHPII001 as "
+    Access to adjusted HPC infrastructure
+    --
+    Provide access to all available EuroHPC JU machines, 
+    where pilot simulations will be performed. 
+    Matching the machine to the simulation of a 
+    given use case should take into account the 
+    processing model and the ability to use the 
+    offered technological possibilities
+    "
+
+    usecase SCOHPII002 as "
+    Prototyping HPC infrastructure
+    --
+    Provide a HPC infrastructure for fast prototyping of 
+    HIDALGO2 workflows
+    "
+
+    usecase SCOHPII003 as "
+    Internal CI/CD installation
+    --
+    Installation and configuration of local CI/CD 
+    where all project codes will be deployed. 
+    This system will be connected to CI/CD environment
+    "
+   
+    usecase SCOHPII004 as "
+    Integration with CI/CD installation
+    --
+    Integration with the planned EuroHPC CI/CD environment 
+    to push stable software releases on a regular basis
+    "
+
+    usecase SCOHPII005 <<check>> as "
+    Assure space and data management software 
+    for the long term data storage 
+    --
+    Installation of a data management system 
+    along with sufficient data storage
+    "
+
+    usecase SCOHPII006 <<check>> as "
+    Assure space for the short term data storage 
+    --
+    Short term data storage requires space 
+    for store data under processing 
+    multistage tasks, e.g. ensemble scenarios
+    "
+
+    usecase SCOHPII007 as "
+    Resources for hosting Services
+    --
+    Compute and storage resources, e.g. in the form 
+    of VM's on available servers, to host the 
+    various web services to be provided by HiDALGO2. 
+    Virtual machines are required to deploy 
+    all operating portal services like orchestration, 
+    monitoring, authentication, etc.
+    "
+
+    usecase SCOHPII008 as "
+    Deployment of Kubernetes to Hadoop scale-up
+    --
+    Deployment of Kubernetes with container support 
+    to adequatly scale-up Hadoop jobs for pilot applications. 
+    "
+
+    
+
+    usecase SCOHPII010 <<check>> as "
+    Efficient processes interconnection
+    --
+    The software developed to manage and 
+    orchestrate the infrastructure must support 
+    the execution of MPI applications in preferable 
+    version. Use cases make use of MPI to execute 
+    HPC-parallel applications to reduce the 
+    execution time and increase their scalability. 
+    "
+
+    usecase SCOHPII011 as "
+    UAP simulations benchmarking
+    --
+    Carrying out a benchmark of the Urban Air 
+    Project pilot simulation applications in 
+    accordance with the defined procedure.
+    "
+
+    usecase SCOHPII012 as "
+    UBM simulations benchmarking
+    --
+    Carrying out a benchmark of the Urban Building 
+    Model pilot simulation applications in 
+    accordance with the defined procedure.
+    "
+
+    usecase SCOHPII013 as "
+    RES simulations benchmarking
+    --
+    Carrying out a benchmark of the Renewable Energy 
+    Sources pilot simulation applications in 
+    accordance with the defined procedure.
+    "
+
+    usecase SCOHPII014 as "
+    Wildfires simulations benchmarking
+    --
+    Carrying out a benchmark of the Wildfires pilot 
+    simulation applications in accordance with the 
+    defined procedure.
+    "
+
+    usecase SCOHPII015 as "
+    Infrastructure for trainings
+    --
+    Prepare infrastructure for conducting trainings 
+    for both internal and external participants
+    " 
+
+    usecase SCOHPII016 as "
+    Benchmark simulations
+    "
+
+    SCOHPII011 -l-|> SCOHPII016
+    SCOHPII012 -l-|> SCOHPII016
+    SCOHPII013 -l-|> SCOHPII016
+    SCOHPII014 -l-|> SCOHPII016
+    SCOHPII007 -l-|> SCOHPII008
+    SCOHPII006 -l-|> SCOHPII005
+    SCOHPII003 .r.> SCOHPII004 : include
+}
+
+actor "HPC User" as hpc_user
+actor "Pilot Scientist" as pilot_scientist
+actor "Data Scientist" as data_scientist
+actor "Benchmark Admin" as bench_admin
+
+hpc_user <|-- pilot_scientist
+hpc_user <|-- data_scientist
+
+hpc_admin -- SCOHPII002
+cicd_admin -- SCOHPII003
+cicd_admin -- SCOHPII004
+dms_admin -- SCOHPII005
+dms_admin -- SCOHPII006
+cloud_admin -- SCOHPII007
+cloud_admin -- SCOHPII008
+hpc_admin -- SCOHPII010
+infra_admin -- SCOHPII015
+SCOHPII001 -- hpc_user
+SCOHPII016 -- pilot_scientist
+SCOHPII009 -- bench_admin
+
+skinparam usecase<<check>> {
+    BackgroundColor LightBlue
+}
+
+@enduml

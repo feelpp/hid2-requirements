@@ -1,0 +1,57 @@
+@startuml hidalgo2_training
+'left to right direction
+skinparam actorStyle awesome
+
+'packages
+
+package "Training" << TRA >> {
+    'left to right direction
+
+
+    usecase SCOTRA001 as "
+    HPC training 
+    "
+
+    usecase SCOTRA002 as "
+    Cloud training
+    "
+
+    usecase SCOTRA003 as "
+    Training in common optimization techniques in HPC systems
+    "
+
+    usecase SCOTRA004 as "
+    Link activities to long term initiatives
+    "
+
+    usecase SCOTRA005 as "
+    Understanding User Groups
+    "
+
+    usecase SCOTRA006 as "
+    Training
+    "
+
+
+    SCOTRA001 -d-|> SCOTRA006
+    SCOTRA002 -d-|> SCOTRA006
+    SCOTRA003 -d-|> SCOTRA006
+}
+
+'actors
+actor "Training provider" as training_provider
+actor "Training admin" as training_admin
+actor "Trainee" as trainee
+
+
+training_provider -u- SCOTRA006
+trainee -u- SCOTRA006
+training_admin -d- SCOTRA004
+training_admin -d- SCOTRA005
+
+
+skinparam usecase<<check>> {
+    BackgroundColor LightBlue
+}
+
+@enduml

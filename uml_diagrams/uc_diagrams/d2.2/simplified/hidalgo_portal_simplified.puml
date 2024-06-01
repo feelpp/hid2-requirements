@@ -1,0 +1,90 @@
+@startuml hidalgo2_portal
+'left to right direction
+skinparam actorStyle awesome
+
+'actors
+actor "Infra Admin" as infra_admin
+actor "Portal Admin" as portal_admin
+
+infra_admin <|-d- portal_admin
+
+'packages
+
+package "Portal" << POR >> {
+    left to right direction
+
+
+    usecase SCOPOR001 <<check>> as "
+    Portal Development
+    "
+
+    usecase SCOPOR002 <<check>> as "
+    Development and maintenance of orchestration HPC plugin
+    "
+
+    usecase SCOPOR003 <<check>> as "
+    Support external pilots
+    "
+
+    usecase SCOPOR004 as "
+    Analyse and define HiDALGO2 workflows
+    "
+
+    usecase SCOPOR005 as "
+    Enable scalable and resilient Workflow Management System
+    "
+
+    usecase SCOPOR006 as "
+    Interfacing data management
+    "
+
+    usecase SCOPOR007 as "
+    Execution Monitoring
+    "
+
+    usecase SCOPOR008 as "
+    3D-visualization of CFD data
+    "
+
+    usecase SCOPOR009 as "
+    Web-based visualization
+    "
+
+    usecase SCOPOR010 as "
+    Visualization for data of intermediate workflow steps
+    "
+
+    SCOPOR008 -r-|> SCOPOR009
+    SCOPOR010 -r-|> SCOPOR009
+    
+    SCOPOR005 .l.> SCOPOR004 : include
+    SCOPOR005 .r.> SCOPOR006 : include
+    SCOPOR005 .r.> SCOPOR007 : include
+
+    SCOPOR006 .l.> SCOPOR009 : include
+}
+
+actor "HPC User" as hpc_user
+actor "Pilot Scientist" as pilot_scientist
+actor "Data Scientist" as data_scientist
+
+pilot_scientist -d-|> hpc_user
+data_scientist -d-|> hpc_user
+
+portal_admin -d- SCOPOR001
+portal_admin -d- SCOPOR002
+portal_admin -d- SCOPOR005
+
+data_scientist -u- SCOPOR009
+
+pilot_scientist -u- SCOPOR002
+pilot_scientist -u- SCOPOR003
+pilot_scientist -u- SCOPOR004
+pilot_scientist -u- SCOPOR005
+
+
+skinparam usecase<<check>> {
+    BackgroundColor LightBlue
+}
+
+@enduml
