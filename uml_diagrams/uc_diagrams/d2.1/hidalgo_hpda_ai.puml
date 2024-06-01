@@ -74,6 +74,13 @@ package "HPDA & AI" << DAAI >> {
     This is used by application providers and developers.
     "
 
+    usecase SCODAAI008  as "
+    Create Pipelines for advanced analytics and simulations
+    --
+    Support the creation of peipelines to generate simulations for HPDA and ML/AI applications.
+    Requires coordination between data scientists and pilot scientists.
+    "
+
 }
 
 actor "HPC User" as hpc_user
@@ -94,6 +101,12 @@ pilot_scientist -u- SCODAAI003
 pilot_scientist -u- SCODAAI004
 pilot_scientist -u- SCODAAI006
 pilot_scientist -u- SCODAAI007
+
+pilot_scientist -u- SCODAAI008
+data_scientist -u- SCODAAI008
+
+
+
 
 
 skinparam usecase<<check>> {

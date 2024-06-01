@@ -46,6 +46,15 @@ package "Pilots" << PIL >> {
     evaluate the performance of different implementations
     "
 
+    usecase SCOPIL0041 as "
+    Use case validation
+    --
+    The methods and data 
+    to be used for validation are described. 
+    Validate simulations and 
+    evaluate the  performance over time
+    "
+
     usecase SCOPIL005 as "
     Large-scale time series analytics environment
     --
@@ -122,7 +131,7 @@ package "Pilots" << PIL >> {
     "
 
     usecase SCOPIL015 as "
-    UBM - Improvement of the radioactive heat transfer
+    UBM - Improvement of the radiative heat transfer
     --
     The radiative heat transfer of the building models 
     will be improved due to a better estimation 
@@ -248,6 +257,13 @@ package "Pilots" << PIL >> {
     "
 
     SCOPIL004 .d.> SCOPIL022 : include
+    
+    SCOPIL0041 .d.> SCOPIL014 : include
+    SCOPIL0041 .d.> SCOPIL017 : include 
+    SCOPIL001  .d.> SCOPIL014 : include
+    SCOPIL001  .d.> SCOPIL017 : include
+    SCOPIL029  .d.> SCOPIL014 : include
+    SCOPIL029  .d.> SCOPIL017 : include
 
     SCOPIL031 .d.> SCOPIL009 : include
     SCOPIL031 .d.> SCOPIL019 : include
@@ -290,6 +306,7 @@ package "Pilots" << PIL >> {
 pilot_scientist -- SCOPIL001
 data_scientist -- SCOPIL001
 data_scientist -- SCOPIL002
+pilot_scientist -- SCOPIL002
 data_scientist -- SCOPIL003
 pilot_scientist -- SCOPIL004
 data_scientist -- SCOPIL005
